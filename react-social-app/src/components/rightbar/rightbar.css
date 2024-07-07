@@ -2,6 +2,8 @@
     flex: 3.5;
     position: sticky;
     top: 50px;
+    background-color: black;
+    color: white;
   }
   
   .rightbarWrapper {
@@ -70,5 +72,57 @@
  
 }
 .rightbarTitle{
+  margin-bottom: 20px;
+  margin-left: 120px;
+}
+.rightbarInfoItem
+{
+  margin-bottom: 20px;
+  margin-left: 60px;
+  display: flex;
+   
+  
+}
+.rightbarInfoValue{
+  margin-left: 20px;
+  font-weight: 300;
+}
+.rightbarFollowingName{
+display: flex;
+flex-wrap: wrap;
+font-weight: 500;
+margin-left: 18px;
+margin-top: 10px;
+cursor: pointer;
+
+}
+.rightbarFollowingImg{
+  height: 94px;
+  width: 94px;
+  border-radius: 12px;
+  cursor: pointer;
+  
+  object-fit: cover;
+  border: 1px solid white;
+  margin-left: 15px;
+ 
+  
+}
+.rightbarFollowingImg:hover{
+  box-shadow: 2px 2px 5px white;
+  height: 96px;
+  width: 96px;
+
+}
+.rightbarFollowings
+{
+  display: flex;
+ flex-wrap: wrap;
+ justify-content: space-between;
+  
+}
+.rightbarFollowing{
+  display: flex;
+  flex-direction: column;
   margin-bottom: 20px;
 }

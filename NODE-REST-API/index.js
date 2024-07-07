@@ -36,7 +36,7 @@ async function connectToDB() {
 
 
 // Start the server after connecting to the database
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 connectToDB().then(() => {
   app.listen(PORT, () => {

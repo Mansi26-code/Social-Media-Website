@@ -1,79 +1,61 @@
-export const Users=[
+export const Users = [
     {
-        id:1,
-        profilePicture:"/assets/person/download.jpg",
-        username:"Mike Louis"
-
-    },
-
-    {
-        id:2,
-        profilePicture:"/assets/person/download.jpeg",
-        username:"Luna Bennett"
-
-    },
-
-    {
-        id:3,
-        profilePicture:"/assets/person/images.jpg",
-        username:"Evie Castillo"
-
-    },
-
-    {
-        id:4,
-        profilePicture:"/assets/person/person2.jpeg",
-        username:"Keira Dubois"
-
-    },
-
-    {
-        id:5,
-        profilePicture:"/assets/person/person3.jpeg",
-        username:"Aiden Bennett"
-
-    },
-
-    {
-        id:6,
-        profilePicture:"/assets/person/person4.jpg",
-        username:"Liam Moreau"
-
-    },
-
-    {
-        id:7,
-        profilePicture:"/assets/person/person7.jpg",
-        username:"Shivam Singh"
-
-    },
-
-    {
-        id:8,
-        profilePicture:"/assets/person/person6.jpeg",
-        username:"Aksh Kashyap"
-
+        id: 1,
+        profilePicture: "person/download.jpg",
+        username: "Mike Louis"
     },
     {
-        id:9,
-        profilePicture:"/assets/person/person12.jpg",
-        username:"Edward Louis"
-
+        id: 2,
+        profilePicture: "person/download.jpeg",
+        username: "Luna Bennett"
     },
     {
-        id:10,
-        profilePicture:"/assets/person/person11.jpg",
-        username:"Shriyam Sharma"
-
+        id: 3,
+        profilePicture: "person/images.jpg",
+        username: "Evie Castillo"
     },
-  
+    {
+        id: 4,
+        profilePicture: "person/person2.jpeg",
+        username: "Keira Dubois"
+    },
+    {
+        id: 5,
+        profilePicture: "person/person3.jpeg",
+        username: "Aiden Bennett"
+    },
+    {
+        id: 6,
+        profilePicture: "person/person4.jpg",
+        username: "Liam Moreau"
+    },
+    {
+        id: 7,
+        profilePicture: "person/person7.jpg",
+        username: "Shivam Singh"
+    },
+    {
+        id: 8,
+        profilePicture: "person/person6.jpeg",
+        username: "Aksh Kashyap"
+    },
+    {
+        id: 9,
+        profilePicture: "person/person12.jpg",
+        username: "Edward Louis"
+    },
+    {
+        id: 10,
+        profilePicture: "person/person11.jpg",
+        username: "Shriyam Sharma"
+    },
 ];
 
 export const Posts = [
     {
         id: 1,
         desc: "Enjoying a beautiful sunset at the beach!",
-        photo: "/assets/post/download.jpg",
+        photo: "post/download.jpg",
         date: "15 minutes ago",
         userId: 1,
         like: 12,
@@ -82,7 +64,7 @@ export const Posts = [
     {
         id: 2,
         desc: "Had a great time hiking in the mountains.",
-        photo: "assets/post/post1.jpg",
+        photo: "post/post1.jpg",
         date: "30 minutes ago",
         userId: 2,
         like: 8,
@@ -91,7 +73,7 @@ export const Posts = [
     {
         id: 3,
         desc: "Just finished reading an amazing book!",
-        photo: "/assets/post/post2.jpg",
+        photo: "post/post2.jpg",
         date: "1 hour ago",
         userId: 3,
         like: 15,
@@ -100,7 +82,7 @@ export const Posts = [
     {
         id: 4,
         desc: "Visited a charming little cafe downtown.",
-        photo: "/assets/post/post3.jpeg",
+        photo: "post/post3.jpeg",
         date: "2 hours ago",
         userId: 4,
         like: 20,
@@ -109,7 +91,7 @@ export const Posts = [
     {
         id: 5,
         desc: "Captured a stunning view from the top of the hill.",
-        photo: "/assets/post/post3.jpg",
+        photo: "post/post3.jpg",
         date: "3 hours ago",
         userId: 5,
         like: 25,
@@ -118,7 +100,7 @@ export const Posts = [
     {
         id: 6,
         desc: "Spent the afternoon at a local art gallery.",
-        photo: "/assets/post/post4.jpg",
+        photo: "post/post4.jpg",
         date: "5 hours ago",
         userId: 6,
         like: 10,
@@ -127,7 +109,7 @@ export const Posts = [
     {
         id: 7,
         desc: "Exploring the vibrant city streets at night.",
-        photo: "/assets/post/post5.jpg",
+        photo: "post/post5.jpg",
         date: "10 hours ago",
         userId: 7,
         like: 30,
@@ -136,7 +118,7 @@ export const Posts = [
     {
         id: 8,
         desc: "Had a relaxing day by the lake.",
-        photo: "/assets/post/post6.webp",
+        photo: "post/post6.webp",
         date: "1 day ago",
         userId: 8,
         like: 40,
@@ -145,7 +127,7 @@ export const Posts = [
     {
         id: 9,
         desc: "Tried out a new recipe for dinner tonight.",
-        photo: "assets/post/post7.jpg",
+        photo: "post/post7.jpg",
         date: "2 days ago",
         userId: 9,
         like: 50,
@@ -154,7 +136,7 @@ export const Posts = [
     {
         id: 10,
         desc: "Attended an inspiring concert last night.",
-        photo: "assets/post/post8.webp",
+        photo: "post/post8.webp",
         date: "1 week ago",
         userId: 10,
         like: 60,
