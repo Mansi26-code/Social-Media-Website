@@ -2,6 +2,7 @@
   "name": "react-social-app",
   "version": "0.1.0",
   "private": true,
+    "proxy": "http://localhost:8080/NODE-REST-API",
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
@@ -40,6 +41,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://localhost:8800/NODE-REST-API"
+  }
+
 }

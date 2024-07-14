@@ -3,12 +3,11 @@ import axios from 'axios';
 import "./post.css";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-export default function Post({ post }) {
+const Post = ({ post }) => {
     const [like, setLike] = useState(post.like);
     const [isHeartLiked, setIsHeartLiked] = useState(false);
     const [isLikeLiked, setIsLikeLiked] = useState(false);
     const [user, setUser] = useState({});
-
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
     useEffect(() => {
@@ -30,7 +29,6 @@ export default function Post({ post }) {
         } else {
             setLike(like + 1);
             if (isLikeLiked) {
-                setLike(like + 1);
                 setIsLikeLiked(false);
             }
         }
@@ -43,7 +41,6 @@ export default function Post({ post }) {
         } else {
             setLike(like + 1);
             if (isHeartLiked) {
-                setLike(like + 1);
                 setIsHeartLiked(false);
             }
         }
@@ -58,10 +55,10 @@ export default function Post({ post }) {
                         <img
                             className="postProfileImg"
                             src={user.profilePicture ? `${PF}${user.profilePicture}` : "/assets/defaultProfile.png"}
-                            alt=""
+                            alt="Profile"
                         />
                         <span className="postUsername">{user.username || "Unknown User"}</span>
-                        <span className="postDate">{post.date}</span>
+                        <span className="postDate">{new Date(post.createdAt).toDateString()}</span>
                     </div>
                     <div className="postTopRight">
                         <MoreVertIcon />
@@ -69,7 +66,7 @@ export default function Post({ post }) {
                 </div>
                 <div className="postCenter">
                     <span className="postText">{post.desc}</span>
-                    <img className="postImg" src={`${PF}${post.photo}`} alt="" />
+                    <img className="postImg" src={`${PF}${post.photo}`} alt="Post" />
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
@@ -77,13 +74,13 @@ export default function Post({ post }) {
                             className={`likeIcon ${isHeartLiked ? 'liked' : ''}`}
                             src={`${PF}heart.jpeg`}
                             onClick={heartLikeHandler}
-                            alt=""
+                            alt="Heart"
                         />
                         <img
                             className={`likeIcon ${isLikeLiked ? 'liked' : ''}`}
                             src={`${PF}like.png`}
                             onClick={likeLikeHandler}
-                            alt=""
+                            alt="Like"
                         />
                         <span className="postLikeCounter">{like} people liked it</span>
                     </div>
@@ -94,5 +91,8 @@ export default function Post({ post }) {
             </div>
         </div>
     );
-}
+};
+
+export default Post;
+
 
