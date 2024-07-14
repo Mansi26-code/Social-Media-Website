@@ -1,33 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import "./post.css";
-import { Users } from "../../dummy.js";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 export default function Post({ post }) {
-    const user = Users.find(u => u.id === post.userId);
-    
     const [like, setLike] = useState(post.like);
     const [isHeartLiked, setIsHeartLiked] = useState(false);
     const [isLikeLiked, setIsLikeLiked] = useState(false);
+    const [user, setUser] = useState({});
 
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const res = await axios.get(`/users/${post.userId}`);
+                setUser(res.data);
+            } catch (err) {
+                console.error("Error fetching user:", err);
+            }
+        };
+
+        fetchUser();
+    }, [post.userId]);
+
     const heartLikeHandler = () => {
-        setLike(isHeartLiked ? like - 1 : like + 1);
-        setIsHeartLiked(!isHeartLiked);
-        if (isLikeLiked) {
+        if (isHeartLiked) {
             setLike(like - 1);
-            setIsLikeLiked(false);
+        } else {
+            setLike(like + 1);
+            if (isLikeLiked) {
+                setLike(like + 1);
+                setIsLikeLiked(false);
+            }
         }
+        setIsHeartLiked(!isHeartLiked);
     };
 
     const likeLikeHandler = () => {
-        setLike(isLikeLiked ? like - 1 : like + 1);
-        setIsLikeLiked(!isLikeLiked);
-        if (isHeartLiked) {
+        if (isLikeLiked) {
             setLike(like - 1);
-            setIsHeartLiked(false);
+        } else {
+            setLike(like + 1);
+            if (isHeartLiked) {
+                setLike(like + 1);
+                setIsHeartLiked(false);
+            }
         }
+        setIsLikeLiked(!isLikeLiked);
     };
 
     return (
@@ -35,8 +55,12 @@ export default function Post({ post }) {
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <img className="postProfileImg" src={`${PF}${user.profilePicture}`} alt="" />
-                        <span className="postUsername">{user.username}</span>
+                        <img
+                            className="postProfileImg"
+                            src={user.profilePicture ? `${PF}${user.profilePicture}` : "/assets/defaultProfile.png"}
+                            alt=""
+                        />
+                        <span className="postUsername">{user.username || "Unknown User"}</span>
                         <span className="postDate">{post.date}</span>
                     </div>
                     <div className="postTopRight">
@@ -71,3 +95,4 @@ export default function Post({ post }) {
         </div>
     );
 }
+
