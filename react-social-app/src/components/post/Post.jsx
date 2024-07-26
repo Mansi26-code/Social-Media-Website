@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./post.css";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import {format} from 'timeago.js'
+import {Link} from "react-router-dom"
 
 const Post = ({ post }) => {
-    const [like, setLike] = useState(post.like);
+    const [like, setLike] = useState(post.like.length);
     const [isHeartLiked, setIsHeartLiked] = useState(false);
     const [isLikeLiked, setIsLikeLiked] = useState(false);
     const [user, setUser] = useState({});
@@ -13,7 +15,13 @@ const Post = ({ post }) => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await axios.get(`/users/${post.userId}`);
+                const config = {
+                    headers: {
+                      "Access-Control-Allow-Origin": "*",
+                      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+                    }
+                  };
+                const res = await axios.get(`http://127.0.0.1:8080/api/users?userId=${post.userId}`,config);
                 setUser(res.data);
             } catch (err) {
                 console.error("Error fetching user:", err);
@@ -21,7 +29,7 @@ const Post = ({ post }) => {
         };
 
         fetchUser();
-    }, [post.userId]);
+    }, []);
 
     const heartLikeHandler = () => {
         if (isHeartLiked) {
@@ -52,13 +60,16 @@ const Post = ({ post }) => {
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="postTopLeft">
+                        <Link to={'profile/${user.username}'}>
                         <img
                             className="postProfileImg"
-                            src={user.profilePicture ? `${PF}${user.profilePicture}` : "/assets/defaultProfile.png"}
+                            src={user.profilePicture ||PF+"person/avatar.webp"}
                             alt="Profile"
                         />
+                        </Link>
+                       
                         <span className="postUsername">{user.username || "Unknown User"}</span>
-                        <span className="postDate">{new Date(post.createdAt).toDateString()}</span>
+                        <span className="postDate">{format(post.createdAt)}</span>
                     </div>
                     <div className="postTopRight">
                         <MoreVertIcon />
@@ -66,7 +77,7 @@ const Post = ({ post }) => {
                 </div>
                 <div className="postCenter">
                     <span className="postText">{post.desc}</span>
-                    <img className="postImg" src={`${PF}${post.photo}`} alt="Post" />
+                    <img className="postImg" src={PF+ post.img} alt="Post" />
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">

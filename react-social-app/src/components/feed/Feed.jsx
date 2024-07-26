@@ -4,14 +4,21 @@ import "./feed.css";
 import Post from "../post/Post";
 import Share from "../Share/Share";
 
-const Feed = () => {
+const Feed = ({username}) => {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const res = await axios.get("http://localhost:8080/NODE-REST-API/posts/timeline/667acf066222e9f394deaf05");
-                console.log(res.data); // Check what data is returned
+                const config = {
+                    headers: {
+                      "Access-Control-Allow-Origin": "*",
+                      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+                    }
+                  };
+                const res = username?await axios.get("http://127.0.0.1:8080/api/posts/profile/"+username,config)
+                 :await axios.get("http://127.0.0.1:8080/api/posts/timeline/667acf066222e9f394deaf05",config)
+                // Check what data is returned
                 setPosts(res.data); // Assuming res.data is an array of posts
             } catch (err) {
                 console.error("Error fetching posts:", err);
@@ -19,7 +26,8 @@ const Feed = () => {
         };
 
         fetchPosts();
-    }, []);
+   
+ }, [username]);
 
     return (
         <div className="feed">
@@ -34,4 +42,3 @@ const Feed = () => {
 };
 
 export default Feed;
-

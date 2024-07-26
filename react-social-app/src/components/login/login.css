@@ -135,4 +135,6 @@ body {
   .loginRegisterButton:hover {
     background-color: #36a420;
   }
-  
+  .loginButton:disabled{
+    cursor:not-allowed;
+  }
