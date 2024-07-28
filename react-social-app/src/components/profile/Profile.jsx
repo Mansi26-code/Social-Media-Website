@@ -4,14 +4,13 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import { useState, useEffect } from "react";
-import axios from "axios";
-import {useParams} from "react-router"
+import instance from "../../axios"; // Import your custom Axios instance
+import { useParams } from "react-router";
 
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [user, setUser] = useState({});
-  const username=useParams().username;
-  
+  const { username } = useParams();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -22,7 +21,7 @@ export default function Profile() {
             "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
           }
         };
-        const res = await axios.get(`http://127.0.0.1:8080/api/users?username=${username}`, config);
+        const res = await instance.get(`/users?username=${username}`, config);
         setUser(res.data);
         console.log("Fetched user data in Profile:", res.data);
       } catch (err) {
@@ -43,12 +42,12 @@ export default function Profile() {
             <div className="profileCover">
               <img
                 className="profileCoverImg"
-                src={user.coverPicture||`${PF}post/coverPic.webp`}
+                src={user.coverPicture || `${PF}post/coverPic.webp`}
                 alt=""
               />
               <img
                 className="profileUserImg"
-                src={user.profilePicture||`${PF}person/avatar.webp`}
+                src={user.profilePicture || `${PF}person/avatar.webp`}
                 alt=""
               />
             </div>
@@ -58,11 +57,13 @@ export default function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed username={username}/>
-            <Rightbar user={user}/>
+            <Feed username={username} />
+            <Rightbar user={user} />
           </div>
         </div>
       </div>
     </>
   );
 }
+
+

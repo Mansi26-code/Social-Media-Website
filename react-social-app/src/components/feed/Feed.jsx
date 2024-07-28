@@ -1,38 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import "./feed.css";
-import Post from "../post/Post";
-import Share from "../Share/Share";
+import React, { useState, useEffect, useContext } from 'react';
+import './feed.css';
+import Post from '../post/Post';
+import Share from '../Share/Share'; // Ensure the correct import path and capitalization
+import { AuthContext } from '../../context/AuthContext'; // Ensure the correct import path
+import instance from '../../axios';
 
-const Feed = ({username}) => {
+const Feed = ({ username }) => {
     const [posts, setPosts] = useState([]);
+    const { user: currentUser } = useContext(AuthContext); // Get the current user from context
 
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const config = {
-                    headers: {
-                      "Access-Control-Allow-Origin": "*",
-                      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-                    }
-                  };
-                const res = username?await axios.get("http://127.0.0.1:8080/api/posts/profile/"+username,config)
-                 :await axios.get("http://127.0.0.1:8080/api/posts/timeline/667acf066222e9f394deaf05",config)
-                // Check what data is returned
+                const res = username
+                    ? await instance.get(`/posts/profile/${username}`)
+                    : await instance.get(`/posts/timeline/${currentUser._id}`);
+
                 setPosts(res.data); // Assuming res.data is an array of posts
             } catch (err) {
-                console.error("Error fetching posts:", err);
+                console.error('Error fetching posts:', err);
             }
         };
 
         fetchPosts();
-   
- }, [username]);
+    }, [username, currentUser._id]);
 
     return (
         <div className="feed">
             <div className="feedWrapper">
-                <Share />
+                {(!username || username === currentUser.username) && <Share />} {/* Conditionally render Share */}
                 {posts.map((post) => (
                     <Post key={post._id} post={post} />
                 ))}
@@ -42,3 +38,5 @@ const Feed = ({username}) => {
 };
 
 export default Feed;
+
+

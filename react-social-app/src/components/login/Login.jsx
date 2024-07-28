@@ -30,11 +30,11 @@ export default function Login() {
           <form className="loginBox" onSubmit={handleClick}>
             <input placeholder="Email" type="email" required className="loginInput" ref={email} />
             <input placeholder="Password" className="loginInput" required minLength="6" type="password" ref={password} />
-            <button className="loginButton" type="submit" disabled={isFetching}>{isFetching ? <CircularProgress color="inherit" size="20px" /> : "Log In"}</button>
+            <button className="loginButton" type="submit" disabled={isFetching}>
+              {isFetching ? <CircularProgress color="inherit" size="20px" /> : "Log In"}
+            </button>
             <span className="loginForgot">Forgot Password?</span>
             <button className="loginRegisterButton">
-
-
               {isFetching ? <CircularProgress color="inherit" size="20px" /> : "Create a new Account"}
             </button>
           </form>

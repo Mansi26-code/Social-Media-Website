@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import "./register.css";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; // Import axios
+import instance from '../../axios';
+ // Import the custom Axios instance
 
 export default function Register() {
   const username = useRef();
@@ -22,7 +23,8 @@ export default function Register() {
         password: password.current.value,
       };
       try {
-        await axios.post("/auth/register", user);
+        await instance.post("/auth/register", user);
+        console.log(username);// Use the custom Axios instance
         navigate("/login");
       } catch (err) {
         console.log(err);
@@ -56,4 +58,5 @@ export default function Register() {
     </div>
   );
 }
+
 
