@@ -27,15 +27,17 @@ const Post = ({ post }) => {
                         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
                     }
                 };
-                const res = await instance.post(`/users?userId=${post.userId}`, config);
+                const res = await instance.post(`/users?userId=${post.userId}`, {}, config);
+                console.log(res.data);
                 setUser(res.data);
             } catch (err) {
                 console.error("Error fetching user:", err);
             }
         };
-
+    
         fetchUser();
     }, [post.userId]);
+    
 
     const heartLikeHandler = async () => {
         if (!currentUser) return; // Ensure currentUser is available

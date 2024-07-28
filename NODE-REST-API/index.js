@@ -7,7 +7,7 @@ const morgan = require("morgan");
 const userRoute=require("./routes/users");
 const authRoute=require("./routes/auth");
 const PostRoute=require("./routes/posts");
-
+const multer=require("multer")
 dotenv.config();
 
 const app = express();
@@ -20,6 +20,25 @@ app.use(cors({
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
+
+const storage=multer.diskStorage({
+  destination:(req,file,cb)=>{
+    cb(null,"public/images");
+  },
+  filename:(req,file,cb)=>{
+    cb(null,req.body.name);
+  },
+});
+const upload=multer({storage});
+app.post("/api/upload",upload.single("file"),(req,res)=>{
+  try{
+    return res.status(200).json("File uploaded Successfully.");
+  }
+  catch(err)
+  {
+    console.log(err)
+  }
+})
 app.use("/api/user",userRoute)
 app.use("/api/auth",authRoute)
 app.use("/api/posts",PostRoute)
